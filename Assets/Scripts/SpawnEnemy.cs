@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
+    // 
     public List<Transform> transforms = new List<Transform>();
     public Transform enemyTrash;
     public GameObject preFab;
@@ -56,6 +57,7 @@ public class SpawnEnemy : MonoBehaviour
         }
     }
 
+    // Figures out which direction the object is shooting from 
     private Vector3 GetOrientation()
     {
         Vector3 newPosition = Vector3.zero;
@@ -85,6 +87,7 @@ public class SpawnEnemy : MonoBehaviour
         return newPosition;
     }
 
+    // Sets the direction in which the enemy will go into 
     private Vector3 GetSpeed()
     {
         Vector3 newSpeed = Vector3.zero;

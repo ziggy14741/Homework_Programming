@@ -17,6 +17,14 @@ public class Enemy : MonoBehaviour
     public float deathTime = 100f;   //How long before the bullet dies 
     public bool playerBullet = true; //Is the bullet used by player or enemy 
 
+    // Tags and Names 
+    private string boundsTag = "Bounds";
+    private string bulletTag = "Bullet";
+    private string gameControllerComponent = "GameController";
+
+    // Component 
+    private GameController _gameController;
+
     //==================================================================================================================
     // Base Method  
     //==================================================================================================================
@@ -24,6 +32,7 @@ public class Enemy : MonoBehaviour
     //Checks who is shooting the bullet and set up the bullet settings 
     private void Start()
     {
+        _gameController = GameObject.Find(gameControllerComponent).GetComponent<GameController>();
         StartCoroutine(Death());
     }
 
@@ -36,7 +45,6 @@ public class Enemy : MonoBehaviour
     // Bullet Set Up  
     //==================================================================================================================
 
-
     //Waits till timer is out then destroys the bullet 
     private IEnumerator Death()
     {
@@ -46,16 +54,18 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Bullet")
+        // If it touches the bullet, it updates 
+        if (collision.gameObject.tag == bulletTag)
         {
             //Updates the Score 
-            GameObject.Find("GameController").GetComponent<GameController>().UpdateScore();
+            _gameController.UpdateScore();
             //Destorys the bullet
             Destroy(collision.gameObject);
             //Destorys the enemy 
             Destroy(gameObject);
         }
-        else if(collision.gameObject.tag == "Bounds")
+        // If the enemy touches a bound it gets destored 
+        else if(collision.gameObject.tag == boundsTag)
         {
             Destroy(gameObject);
         }

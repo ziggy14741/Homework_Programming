@@ -6,17 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class GameController: MonoBehaviour
 {
+    // Score 
     public TextMeshProUGUI scoreText;
     private int score = 0;
 
+    // Updates the score and UI 
     public void UpdateScore()
     {
         score++;
         scoreText.text = score.ToString(); 
     }
   
-    public void ReloadLevel()
-    {
-        SceneManager.LoadScene("Level_1");
-    }
+    // Reload the current scene 
+    public void ReloadLevel() {   SceneManager.LoadScene(SceneManager.GetActiveScene().name);}
 }
